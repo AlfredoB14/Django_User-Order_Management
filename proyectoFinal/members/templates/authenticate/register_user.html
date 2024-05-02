@@ -1,0 +1,22 @@
+{%extends 'events/base.html' %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <div class="alert alert-primary" role="alert">
+            There was an error with the form
+        </div>
+    {%endif%}
+    
+<h1>Register</h1>
+
+<form action="{% url 'register' %}" method="POST">
+
+    {%csrf_token%}
+
+    {{form.as_p}}
+
+    <input type="submit" value="Submit" class="btn btn-primary"></input>
+</form>
+
+{% endblock %}
