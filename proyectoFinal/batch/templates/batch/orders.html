@@ -1,0 +1,60 @@
+{%extends 'events/base.html' %}
+
+{% block content %}
+
+{% if user.is_staff %}
+
+    {% for user1 in users%}
+
+    <h1> {{user1}} Orders </h1>
+
+        {%for batch in batches%}
+
+            {% if batch.orderOwner == user1 %}
+            <div class="card">
+                <div class="card-body">
+                <p>{{batch.boxes}}</p>
+                <p>{{batch.units_per_box}}</p>
+                <p>{{batch.orderOwner}}</p>
+                <p>{{batch.status}}</p>
+
+            </div>
+
+          </div>
+          <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
+            {%endif%}
+
+        {%endfor%}
+
+{%endfor%}
+
+{%else%}
+
+<h1> {{user}} Orders </h1>
+
+{%for batch in batches%}
+
+    {% if batch.orderOwner == user %}
+    <div class="card">
+        <div class="card-body">
+            <p>{{batch.boxes}}</p>
+            <p>{{batch.units_per_box}}</p>
+            <p>{{batch.orderOwner}}</p>
+            <p>{{batch.status}}</p>
+
+            <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
+        </div>
+      </div>
+
+
+
+
+    {%endif%}
+
+{%endfor%}
+
+{%endif%}
+
+
+
+{%endblock%}
