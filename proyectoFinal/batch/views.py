@@ -59,3 +59,28 @@ def deleteOrder(request, orderid):
     else:
         messages.success(request, ("You are not logged in"))
         return redirect('home')
+    
+
+
+def modifyOrder(request, orderid):
+
+    if request.user.is_authenticated:
+
+        order =  Batch.objects.get(pk=orderid)
+
+        if order.orderOwner == request.user:
+            
+            form = batchForm(request.POST or None, instance=order)
+
+            if form.is_valid():
+                form.save()
+                return redirect('showB')
+
+            return render(request, 'batch/modifyOrder.html', {'order':order, 'form':form})
+        
+        else:
+            messages.success(request, ("You don't have permission to do that!"))
+            return redirect('home')   
+    else:
+        messages.success(request, ("You are not logged in"))
+        return redirect('home')

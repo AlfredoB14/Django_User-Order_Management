@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def login_user(request):
 
@@ -66,3 +67,39 @@ def register_user(request):
         return render(request, 'authenticate/register_user.html', {
             'form':form,
         })
+    
+def userManagement(request):
+
+    if request.user.is_authenticated:
+
+        users = User.objects.all()
+        return render(request, 'authenticate/userManagement.html', {'users': users})
+
+    else:
+        messages.success(request, ("You don't have permission to do that!"))
+        return redirect('home')
+    
+
+def delete_user(request, userid):
+
+    if request.user.is_authenticated:
+
+        user = User.objects.get(pk=userid)
+
+        if request.user.id == userid or request.user.is_staff:
+
+            messages.success(request, ("The user was Deleted Successfully"))
+            user.delete()
+            logout(request)
+            return redirect('home')
+        
+        else:
+            messages.success(request, ("You don't have permission to do that!"))
+            return redirect('home')   
+
+    else:
+        messages.success(request, ("You are not logged in"))
+        return redirect('home')
+
+def modify_user(request, userid):
+    pass

@@ -9,4 +9,5 @@ class Batch(models.Model):
     units_per_box = models.IntegerField()
     orderOwner = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.TextField(default="Confirmation")
+    adress = models.CharField(default="None", max_length=80)
     

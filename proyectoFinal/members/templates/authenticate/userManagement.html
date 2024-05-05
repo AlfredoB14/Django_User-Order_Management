@@ -1,0 +1,48 @@
+{%extends 'events/base.html' %}
+
+{% block content %}
+
+
+{%if user.is_staff %}
+
+    <h1>User Management</h1>
+
+    {%for user1 in users %}
+    
+        {%if not user1.is_staff %}
+            <h1>{{user1}}</h1>
+
+                <div class="card">
+                    <div class="card-body">
+
+                    <a href="{% url 'deleteU' user1.id %}" class="btn btn-danger btn-sm" >Delete User</a>
+                    <a href="{% url 'modifyU' user1.id %}" class="btn btn-secondary btn-sm" >Modify User</a>
+
+                </div>
+            </div>
+        {%endif%}
+
+    {%endfor%}
+
+
+
+{%else%}
+
+    <h1>Profile</h1>
+
+    <h1>{{user}}</h1>
+
+    <div class="card">
+        <div class="card-body">
+
+        <a href="{% url 'deleteU' user.id %}" class="btn btn-danger btn-sm" >Delete Account</a>
+        <a href="{% url 'modifyU' user.id %}" class="btn btn-secondary btn-sm" >Modify Profile</a>
+
+    </div>
+  </div>
+
+{%endif%}
+
+
+
+{% endblock %}

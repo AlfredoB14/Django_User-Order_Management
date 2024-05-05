@@ -13,15 +13,20 @@
             {% if batch.orderOwner == user1 %}
             <div class="card">
                 <div class="card-body">
-                <p>{{batch.boxes}}</p>
-                <p>{{batch.units_per_box}}</p>
-                <p>{{batch.orderOwner}}</p>
-                <p>{{batch.status}}</p>
+                <p>N. of Boxes: {{batch.boxes}}</p>
+                <p>Units per box: {{batch.units_per_box}}</p>
+                <p>User: {{batch.orderOwner}}</p>
+                <p>Status: {{batch.status}}</p>
+                <p>Shipping adress: {{batch.adress}}</p>
+
+
+                <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
+                <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm" >Modify Order</a>
 
             </div>
 
           </div>
-          <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
+
             {%endif%}
 
         {%endfor%}
@@ -37,12 +42,16 @@
     {% if batch.orderOwner == user %}
     <div class="card">
         <div class="card-body">
-            <p>{{batch.boxes}}</p>
-            <p>{{batch.units_per_box}}</p>
-            <p>{{batch.orderOwner}}</p>
-            <p>{{batch.status}}</p>
+
+            <p>N. of Boxes: {{batch.boxes}}</p>
+            <p>Units per box: {{batch.units_per_box}}</p>
+            <p>User: {{batch.orderOwner}}</p>
+            <p>Status: {{batch.status}}</p>
+            <p>Shipping adress: {{batch.adress}}</p>
+
 
             <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
+            <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm" >Modify Order</a>
         </div>
       </div>
 
