@@ -14,6 +14,10 @@
 
                 <div class="card">
                     <div class="card-body">
+                        <p>{{user1.username}}</p>
+                        <p>{{user1.first_name}}</p>
+                        <p>{{user1.last_name}}</p>
+                        <p>{{user1.email}}</p>
 
                     <a href="{% url 'deleteU' user1.id %}" class="btn btn-danger btn-sm" >Delete User</a>
                     <a href="{% url 'modifyU' user1.id %}" class="btn btn-secondary btn-sm" >Modify User</a>
@@ -34,7 +38,10 @@
 
     <div class="card">
         <div class="card-body">
-
+            <p>{{user.username}}</p>
+            <p>{{user.first_name}}</p>
+            <p>{{user.last_name}}</p>
+            <p>{{user.email}}</p>
         <a href="{% url 'deleteU' user.id %}" class="btn btn-danger btn-sm" >Delete Account</a>
         <a href="{% url 'modifyU' user.id %}" class="btn btn-secondary btn-sm" >Modify Profile</a>
 
