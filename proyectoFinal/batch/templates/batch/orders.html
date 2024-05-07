@@ -18,6 +18,7 @@
                 <p>User: {{batch.orderOwner}}</p>
                 <p>Status: {{batch.status}}</p>
                 <p>Shipping adress: {{batch.adress}}</p>
+                <p>Date Created: {{batch.date_created}}</p>
 
 
                 <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
@@ -48,6 +49,7 @@
             <p>User: {{batch.orderOwner}}</p>
             <p>Status: {{batch.status}}</p>
             <p>Shipping adress: {{batch.adress}}</p>
+            <p>Date Created: {{batch.date_created}}</p>
 
 
             <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>

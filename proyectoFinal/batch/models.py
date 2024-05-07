@@ -10,5 +10,5 @@ class Batch(models.Model):
     orderOwner = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.TextField(default="Confirmation")
     adress = models.CharField(default="None", max_length=80)
-    date_created = models.DateField(auto_now=True)
+    date_created = models.DateField(auto_now_add=True)
     date_confirmed = models.DateField(null=True)
