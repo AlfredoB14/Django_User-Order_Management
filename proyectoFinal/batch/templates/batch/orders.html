@@ -15,15 +15,18 @@
                 <div class="card-body">
                 <p>N. of Boxes: {{batch.boxes}}</p>
                 <p>Units per box: {{batch.units_per_box}}</p>
+                <p>Flavour: {{batch.flavour}}</p>
                 <p>User: {{batch.orderOwner}}</p>
                 <p>Status: {{batch.status}}</p>
                 <p>Shipping adress: {{batch.adress}}</p>
                 <p>Date Created: {{batch.date_created}}</p>
 
-
+                <p>Total: ${{batch.total}}</p>
                 <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
                 <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm" >Modify Order</a>
-
+                {%if batch.status != 'Completed'%}
+                    <a href="{% url 'nextS' batch.id %}" class="btn btn-warning btn-sm" >Next Stage</a>
+                {%endif%}
             </div>
 
           </div>
@@ -46,14 +49,16 @@
 
             <p>N. of Boxes: {{batch.boxes}}</p>
             <p>Units per box: {{batch.units_per_box}}</p>
+            <p>Flavour: {{batch.flavour}}</p>
             <p>User: {{batch.orderOwner}}</p>
             <p>Status: {{batch.status}}</p>
             <p>Shipping adress: {{batch.adress}}</p>
             <p>Date Created: {{batch.date_created}}</p>
 
-
+            <p>Total: ${{batch.total}}</p>
             <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
             <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm" >Modify Order</a>
+
         </div>
       </div>
 

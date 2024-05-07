@@ -10,6 +10,33 @@
 </head>
 <body>
     <h1>Hola Admin {{user}}</h1>
+
+    <p>Pending Orders: </p>
+    {%for user1 in users%}
+        {%if not user1.is_staff%}
+            {%for order in orders%}
+                {%if order.orderOwner == user1 and order.status != 'Completed'%}
+                    <div class="card">
+                        <div class="card-body">
+                        <p>Order {{order.id}}</p>
+                        <p>N. of Boxes: {{order.boxes}}</p>
+                        <p>Units per box: {{order.units_per_box}}</p>
+                        <p>Flavour: {{order.flavour}}</p>
+                        <p>User: {{order.orderOwner}}</p>
+                        <p>Status: {{order.status}}</p>
+                        <p>Shipping adress: {{order.adress}}</p>
+                        <p>Date Created: {{order.date_created}}</p>
+
+                        <p>Total: ${{order.total}}</p>
+                        <a href="{% url 'viewO' order.id %}" class="btn btn-secondary btn-sm" >View Order</a>
+                    </div>
+
+                </div>
+                {%endif%}
+            {%endfor%}
+        {%endif%}
+    {%endfor%}
+
 </body>
 </html>
 

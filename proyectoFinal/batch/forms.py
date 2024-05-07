@@ -8,4 +8,4 @@ class batchForm(ModelForm):
 
     class Meta:
         model =  Batch
-        fields = ('boxes', 'units_per_box', 'adress')
+        fields = ('boxes', 'units_per_box', 'adress', 'flavour')
