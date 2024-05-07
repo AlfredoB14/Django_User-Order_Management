@@ -11,6 +11,13 @@
 <body>
     <h1>Hola Admin {{user}}</h1>
 
+
+    <div class="card">
+        <div class="card-body">
+            <p>Total de ganancias de la empresa:</p>
+            <p>${{totals}}</p>
+        </div>
+    </div>
     <p>Pending Orders: </p>
     {%for user1 in users%}
         {%if not user1.is_staff%}

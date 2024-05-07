@@ -8,13 +8,25 @@ from batch.models import Batch
 user = get_user_model()
 def home(request):
 
+    
     if request.user.is_authenticated and request.user.is_staff:
 
         users = User.objects.all()
         orders = Batch.objects.all()
-        return render(request, 'events/adminHome.html', {'users':users, 'orders':orders})
+
+
+        totals = 0
+        for order in orders:
+            totals += order.total
+
+
+        return render(request, 'events/adminHome.html', {'users':users, 'orders':orders, 'totals':totals})
     
     else:
         return render(request, 'events/home.html', {})
     
 
+
+
+
+#Creditos a Valeria Becerra
