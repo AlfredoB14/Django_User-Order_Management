@@ -68,7 +68,7 @@ def modifyOrder(request, orderid):
 
         order =  Batch.objects.get(pk=orderid)
 
-        if order.orderOwner == request.user:
+        if order.orderOwner == request.user or request.user.is_staff:
             
             form = batchForm(request.POST or None, instance=order)
 
