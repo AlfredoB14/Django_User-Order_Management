@@ -1,31 +1,57 @@
 {%extends 'events/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css\mystyles.css' %}">
 </head>
 <body>
-    <h1>Hola Admin {{user}}</h1>
+    <h1>Admin Mode</h1>
 
 
-    <div class="card">
-        <div class="card-body">
-            <p>Total de ganancias de la empresa:</p>
+    <div class="parent">
+
+        <div class="shadow p-4 mb-5 bg-body rounded">
+        <center>
+            <h1>{{user}}</h1>
+            <p>{{user.first_name}} {{user.last_name}}</p>
+            <p>{{user.email}}</p>
+        </center>
+        </div>
+        <div class="shadow p-4 mb-5 bg-body rounded">
+        <center>
+            <h1>Company Profits</h1>
             <p>${{totals}}</p>
+        </center>
         </div>
     </div>
-    <p>Pending Orders: </p>
+
+    <div class="parent_disp_4">
+        <div class="shadow p-4 mb-5 bg-body rounded">
+            <p class="text1">Orders in Confirm</p>
+            {{confirm}}
+        </div>
+        <div class="shadow p-4 mb-5 bg-body rounded">
+            <p class="text1">Orders in Packaging</p>
+            {{packaging}}
+        </div>
+        <div class="shadow p-4 mb-5 bg-body rounded">
+            <p class="text1">Orders in Shipping</p>
+            {{shipping}}
+        </div>
+        <div class="shadow p-4 mb-5 bg-body rounded">
+            <p class="text1">Orders Completed</p>
+            {{completed}}
+        </div>
+    </div>
+
+    <h1>Pending Orders: </h1>
     {%for user1 in users%}
         {%if not user1.is_staff%}
             {%for order in orders%}
                 {%if order.orderOwner == user1 and order.status != 'Completed'%}
-                    <div class="card">
-                        <div class="card-body">
-                        <p>Order {{order.id}}</p>
+                    <div class="shadow p-4 mb-5 bg-body rounded">
+                        <h1>Order {{order.id}}</h1>
                         <p>N. of Boxes: {{order.boxes}}</p>
                         <p>Units per box: {{order.units_per_box}}</p>
                         <p>Flavour: {{order.flavour}}</p>

@@ -1,76 +1,101 @@
-{%extends 'events/base.html' %}
 
+{% extends 'events/base.html' %}
+ 
 {% block content %}
-
+ 
 {% if user.is_staff %}
+    {% for user1 in users %}
 
-    {% for user1 in users%}
+ <div class="shadow p-4 mb-5 bg-body rounded">
+    <h1> {{ user1 }} Orders </h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>OrderID</th>
+                    <th>N. of Boxes</th>
+                    <th>Units per Box</th>
+                    <th>User</th>
+                    <th>Status</th>
+                    <th>Shipping Address</th>
+                    <th>Date Created</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for batch in batches %}
+                    {% if batch.orderOwner == user1 %}
+                        <tr>
+                            <td>{{batch.id}}</td>
+                            <td>{{ batch.boxes }}</td>
+                            <td>{{ batch.units_per_box }}</td>
+                            <td>{{ batch.orderOwner }}</td>
+                            <td>{{ batch.status }}</td>
+                            <td>{{ batch.adress }}</td>
+                            <td>{{batch.date_created}}</td>
+                            <td>${{batch.total}}</td>
+                            {%if batch.status != 'Completed'%}
+                            <td>
+                                <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm" >Modify Order</a>
+                                <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
+                                <a href="{% url 'nextS' batch.id %}" class="btn btn-warning btn-sm" >Next Stage</a>
+                            </td>
+                            
+                        {%else%}
+                        <td></td>
+                        {%endif%}
 
-    <h1> {{user1}} Orders </h1>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+ 
+{% else %}
+ 
 
-        {%for batch in batches%}
-
-            {% if batch.orderOwner == user1 %}
-            <div class="card">
-                <div class="card-body">
-                <p>N. of Boxes: {{batch.boxes}}</p>
-                <p>Units per box: {{batch.units_per_box}}</p>
-                <p>Flavour: {{batch.flavour}}</p>
-                <p>User: {{batch.orderOwner}}</p>
-                <p>Status: {{batch.status}}</p>
-                <p>Shipping adress: {{batch.adress}}</p>
-                <p>Date Created: {{batch.date_created}}</p>
-
-                <p>Total: ${{batch.total}}</p>
-                <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm" >Modify Order</a>
-                {%if batch.status != 'Completed'%}
-                    <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm" >Delete Order</a>
-                    <a href="{% url 'nextS' batch.id %}" class="btn btn-warning btn-sm" >Next Stage</a>
-                {%endif%}
-            </div>
-
-          </div>
-
-            {%endif%}
-
-        {%endfor%}
-
-{%endfor%}
-
-{%else%}
-
-<h1> {{user}} Orders </h1>
-
-{%for batch in batches%}
-
-    {% if batch.orderOwner == user %}
-    <div class="card">
-        <div class="card-body">
-
-            <p>N. of Boxes: {{batch.boxes}}</p>
-            <p>Units per box: {{batch.units_per_box}}</p>
-            <p>Flavour: {{batch.flavour}}</p>
-            <p>User: {{batch.orderOwner}}</p>
-            <p>Status: {{batch.status}}</p>
-            <p>Shipping adress: {{batch.adress}}</p>
-            <p>Date Created: {{batch.date_created}}</p>
-
-            <p>Total: ${{batch.total}}</p>
-
-            <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm" >Modify Order</a>
-
-        </div>
-      </div>
-
-
-
-
-    {%endif%}
-
-{%endfor%}
-
-{%endif%}
-
-
-
-{%endblock%}
+<div class="shadow p-4 mb-5 bg-body rounded">
+    <h1> {{ user }} Orders </h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>OrderID</th>
+                <th>N. of Boxes</th>
+                <th>Units per Box</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Shipping Address</th>
+                <th>Date Created</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for batch in batches %}
+                {% if batch.orderOwner == user %}
+                    <tr>
+                        <td>{{batch.id}}</td>
+                        <td>{{ batch.boxes }}</td>
+                        <td>{{ batch.units_per_box }}</td>
+                        <td>{{ batch.orderOwner }}</td>
+                        <td>{{ batch.status }}</td>
+                        <td>{{ batch.adress }}</td>
+                        <td>{{batch.date_created}}</td>
+                        <td>${{batch.total}}</td>
+                        {%if batch.status != 'Completed'%}
+                        <td>
+                            <a href="{% url 'deleteO' batch.id %}" class="btn btn-danger btn-sm">Delete Order</a>
+                            <a href="{% url 'modifyO' batch.id %}" class="btn btn-secondary btn-sm">Modify Order</a>
+                        </td>
+                        {%endif%}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+ 
+{% endblock %}

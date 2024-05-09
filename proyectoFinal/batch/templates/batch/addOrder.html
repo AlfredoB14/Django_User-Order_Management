@@ -2,19 +2,21 @@
 
 {% block content %}
 
-<h1>Add an Order</h1>
-<br/><br/>
+<div class="shadow p-4 mb-5 bg-body rounded">
+
+    <h1>Add an Order</h1>
+    <br/><br/>
 
 
-<form action="" method="POST">
+    <form action="" method="POST">
 
-    {% csrf_token %}
+        {% csrf_token %}
 
-    {{form.as_p}}
+        {{form.as_p}}
 
-    <input type="submit" value="Submit" class="btn btn-secondary">
+        <input type="submit" value="Submit" class="btn btn-secondary">
 
-</form>
+    </form>
 
-
+</div>
 {%endblock%}

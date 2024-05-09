@@ -25,7 +25,7 @@ def login_user(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.success(request, ("Credentials not valid"))
+                messages.warning(request, ("Credentials not valid"))
                 return redirect('log')
 
 
@@ -58,7 +58,7 @@ def register_user(request):
         
         else:
             form = RegisterUserForm()
-            messages.success(request, ("Error with register"))
+            messages.warning(request, ("Error with register"))
             return render(request, 'authenticate/register_user.html', {
                 'form':form,
             })
@@ -89,7 +89,7 @@ def delete_user(request, userid):
 
         if request.user.id == userid or request.user.is_staff:
 
-            messages.success(request, ("The user was Deleted Successfully"))
+            messages.warning(request, ("The user was Deleted Successfully"))
             user.delete()
 
             if not request.user.is_staff:
@@ -98,11 +98,11 @@ def delete_user(request, userid):
             return redirect('home')
         
         else:
-            messages.success(request, ("You don't have permission to do that!"))
+            messages.warning(request, ("You don't have permission to do that!"))
             return redirect('home')   
 
     else:
-        messages.success(request, ("You are not logged in"))
+        messages.warning(request, ("You are not logged in"))
         return redirect('home')
 
 def modify_user(request, userid):
@@ -122,8 +122,8 @@ def modify_user(request, userid):
             return render(request, 'authenticate/modifyUser.html', {'user':user, 'form':form})
         
         else:
-            messages.success(request, ("You don't have permission to do that!"))
+            messages.warning(request, ("You don't have permission to do that!"))
             return redirect('home')   
     else:
-        messages.success(request, ("You are not logged in"))
+        messages.warning(request, ("You are not logged in"))
         return redirect('home')

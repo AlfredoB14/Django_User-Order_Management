@@ -3,52 +3,85 @@
 {% block content %}
 
 
-{%if user.is_staff %}
+{% if user.is_staff %}
 
-    <h1>User Management</h1>
-
-    {%for user1 in users %}
-    
-        {%if not user1.is_staff %}
-            <h1>{{user1}}</h1>
-
-                <div class="card">
-                    <div class="card-body">
-                        <p>{{user1.username}}</p>
-                        <p>{{user1.first_name}}</p>
-                        <p>{{user1.last_name}}</p>
-                        <p>{{user1.email}}</p>
-
-                    <a href="{% url 'deleteU' user1.id %}" class="btn btn-danger btn-sm" >Delete User</a>
-                    <a href="{% url 'modifyU' user1.id %}" class="btn btn-secondary btn-sm" >Modify User</a>
-
-                </div>
-            </div>
-        {%endif%}
-
-    {%endfor%}
-
-
-
-{%else%}
-
-    <h1>Profile</h1>
-
-    <h1>{{user}}</h1>
-
-    <div class="card">
-        <div class="card-body">
-            <p>{{user.username}}</p>
-            <p>{{user.first_name}}</p>
-            <p>{{user.last_name}}</p>
-            <p>{{user.email}}</p>
-        <a href="{% url 'deleteU' user.id %}" class="btn btn-danger btn-sm" >Delete Account</a>
-        <a href="{% url 'modifyU' user.id %}" class="btn btn-secondary btn-sm" >Modify Profile</a>
-
+    <div class="shadow p-4 mb-5 bg-body rounded">
+        <div class="text-center">
+            <h1>User Management</h1>
+        </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user1 in users %}
+                    {% if not user1.is_staff %}
+                        <tr>
+                            <td>{{ user1.username }}</td>
+                            <td>{{ user1.first_name }}</td>
+                            <td>{{ user1.last_name }}</td>
+                            <td>{{ user1.email }}</td>
+                            <td>
+                                <a href="{% url 'deleteU' user1.id %}" class="btn btn-danger btn-sm">Delete User</a>
+                                <a href="{% url 'modifyU' user1.id %}" class="btn btn-secondary btn-sm">Modify User</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-  </div>
-
-{%endif%}
+</div>
+{% else %}
+<div class="shadow p-4 mb-5 bg-body rounded">
+    <div class="text-center">
+        <h1>Profile</h1>
+    </div>
+ 
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Username</td>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <td>First Name</td>
+                    <td>{{ user.first_name }}</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>{{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td>Actions</td>
+                    <td>
+                        <a href="{% url 'deleteU' user.id %}" class="btn btn-danger btn-sm">Delete Account</a>
+                        <a href="{% url 'modifyU' user.id %}" class="btn btn-secondary btn-sm">Modify Profile</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
 
 
 

@@ -1,61 +1,64 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #673ab7;">
   <div class="container-fluid">
-
     {% if user.is_staff %}
-    <a class="navbar-brand" href="{% url 'home' %}">FrodOS - Admin</a>
-    {%else%}
-    <a class="navbar-brand" href="{% url 'home' %}">FrodOS</a>
-    {%endif%}
-
+    <a class="navbar-brand" href="{% url 'home' %}">
+      FrodOS - Admin
+      <i class="bi bi-person-badge-fill"></i> <!-- Bootstrap icon for admin -->
+    </a>
+    {% else %}
+    <a class="navbar-brand" href="{% url 'home' %}">FrodOS x Frambu</a>
+    {% endif %}
+ 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+ 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+            Home <i class="bi bi-house-door-fill"></i> <!-- Bootstrap icon for home -->
+          </a>
         </li>
-
+ 
         {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'logt' %}">Logout</a>
+            <a class="nav-link" href="{% url 'logt' %}">Logout <i class="bi bi-box-arrow-right"></i></a> <!-- Bootstrap icon for logout -->
           </li>
         {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'log' %}">Login</a>
+            <a class="nav-link" href="{% url 'log' %}">Login <i class="bi bi-box-arrow-in-right"></i></a> <!-- Bootstrap icon for login -->
           </li>
-
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
+            <a class="nav-link" href="{% url 'register' %}">Register <i class="bi bi-person-plus-fill"></i></a> <!-- Bootstrap icon for register -->
           </li>
         {% endif %}
-
+ 
         {% if user.is_authenticated %}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Orders
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Orders <i class="bi bi-cart-fill"></i> <!-- Bootstrap icon for orders -->
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'addO' %}">Make an Order</a></li>
             <li><a class="dropdown-item" href="{% url 'showB' %}">View Orders</a></li>
           </ul>
         </li>
         {% endif %}
+ 
         {% if user.is_staff %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'manage' %}">Manage Users</a>
+          <a class="nav-link" href="{% url 'manage' %}">Manage Users <i class="bi bi-gear-fill"></i></a> <!-- Bootstrap icon for manage -->
         </li>
-        {%else%}
+        {% else %}
           {% if user.is_authenticated %}
-
-          
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'manage' %}">Profile</a>
+              <a class="nav-link" href="{% url 'manage' %}">Profile <i class="bi bi-person-circle"></i></a> <!-- Bootstrap icon for profile -->
             </li>
           {% endif %}
-        {%endif%}
-
+        {% endif %}
       </ul>
     </div>
   </div>
 </nav>
+ 

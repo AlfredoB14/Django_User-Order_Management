@@ -16,17 +16,27 @@ def home(request):
 
 
         totals = 0
+        total_confirm = 0
+        total_packaging=0
+        total_shipping=0
+        total_completed=0
         for order in orders:
             totals += order.total
 
+            if order.status == "Confirmation":
+                total_confirm+=1
 
-        return render(request, 'events/adminHome.html', {'users':users, 'orders':orders, 'totals':totals})
+            elif order.status == "Packaging":
+                total_packaging+=1
+
+            elif order.status == "Shipping":
+                total_shipping+=1
+            
+            elif order.status == 'Completed':
+                total_completed+=1
+
+        return render(request, 'events/adminHome.html', {'users':users, 'orders':orders, 'totals':totals, 'confirm':total_confirm, 'packaging':total_packaging, 'shipping':total_packaging, 'completed':total_completed})
     
     else:
         return render(request, 'events/home.html', {})
     
-
-
-
-
-#Creditos a Valeria Becerra

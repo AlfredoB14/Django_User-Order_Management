@@ -15,7 +15,7 @@ def showOrders(request):
 
         return render(request, 'batch/orders.html', {'batches':batches, "users":users})
     else:
-        messages.success(request, ("You are not logged in"))
+        messages.warning(request, ("You are not logged in"))
         return redirect('home')
     
 def addOrder(request):
@@ -42,7 +42,7 @@ def addOrder(request):
         return render(request, 'batch/addOrder.html', {'form':form})
     
     else:
-        messages.success(request, ("You are not logged in"))
+        messages.warning(request, ("You are not logged in"))
         return redirect('home')
     
 def deleteOrder(request, orderid):
@@ -53,17 +53,17 @@ def deleteOrder(request, orderid):
 
         if request.user == order.orderOwner or request.user.is_staff:
 
-            messages.success(request, ("The order was Deleted Successfully"))
+            messages.warning(request, ("The order was Deleted Successfully"))
             order.delete()
 
             return redirect('showB')
         
         else:
-            messages.success(request, ("You don't have permission to do that!"))
+            messages.warning(request, ("You don't have permission to do that!"))
             return redirect('home')   
 
     else:
-        messages.success(request, ("You are not logged in"))
+        messages.warning(request, ("You are not logged in"))
         return redirect('home')
     
 
@@ -92,10 +92,10 @@ def modifyOrder(request, orderid):
             return render(request, 'batch/modifyOrder.html', {'order':order, 'form':form})
         
         else:
-            messages.success(request, ("You don't have permission to do that!"))
+            messages.warning(request, ("You don't have permission to do that!"))
             return redirect('home')   
     else:
-        messages.success(request, ("You are not logged in"))
+        messages.warning(request, ("You are not logged in"))
         return redirect('home')
     
 
@@ -110,10 +110,10 @@ def viewOrder(request, orderid):
             return render(request, 'batch/viewOrder.html', {'batch':order})
 
         else:   
-            messages.success(request, ("You don't have permission to do that!"))
+            messages.warning(request, ("You don't have permission to do that!"))
             return redirect('home') 
     else:
-        messages.success(request, ("You are not logged in"))
+        messages.warning(request, ("You are not logged in"))
         return redirect('home')
     
 
@@ -142,9 +142,9 @@ def nextStage(request, orderid):
             return redirect('viewO', orderid)
         
         else:
-            messages.success(request, ("The order has already been completed"))
+            messages.warning(request, ("The order has already been completed"))
             return redirect('viewO', orderid)
 
     else:   
-        messages.success(request, ("You don't have permission to do that!"))
+        messages.warning(request, ("You don't have permission to do that!"))
         return redirect('home') 

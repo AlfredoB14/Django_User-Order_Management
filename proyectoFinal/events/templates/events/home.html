@@ -1,16 +1,38 @@
-{%extends 'events/base.html' %}
-
+{% extends 'events/base.html' %}
+ 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Hola {{user}}</h1>
-</body>
-</html>
+<center>
+    <img src="https://github.com/yumnology/images_project/blob/main/Untitled%20design.png?raw=true" width="70%">
+</center>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    
+                    <h1 class="card-title text-center">Hello, {{ user.first_name|default:"Guest" }}!</h1>
+                    <center>
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwebstockreview.net%2Fimages%2Fjam-clipart-animated.png&f=1&nofb=1&ipt=1659a3c9782c13f880a4395a173886aa1eb4ffc9623eedfb12583a002ff1ec5a&ipo=images" alt=""width="20%">
+                    </center>
+                    <br>
+                    <br>
+                    <p class="card-text text-center">Welcome to FrodOS, your one-stop solution for managing orders and more.</p>
+                    {%if user.is_authenticated %}
+                    <div class="d-flex justify-content-around mt-4">
+                        <a href="/batch/addOrder/" class="btn btn-primary btn-warning px-4 py-2 shadow-sm">Add Order</a>
+                        <a href="/batch/orders/" class="btn btn-secondary btn-info px-4 py-2 shadow-sm">View Orders</a>
+                    </div>
+                    {%else%}
+                    <center>
+                        <a href="{%url 'log'%}" class="btn btn-secondary btn-info px-4 py-2 shadow-sm">Log In</a>
+                    </center>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
 
 {% endblock %}
+ 

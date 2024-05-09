@@ -1,0 +1,27 @@
+.parent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 0px;
+}
+
+body {
+    font-family: "Inter";
+    font-weight: 400;
+    background-color: #e8e2f6;
+  }
+
+.parent_disp_4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+.text1{
+    font-size: medium;
+    font-weight: bold;
+    
+}
