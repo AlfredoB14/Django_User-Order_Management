@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'events',
     'members',
     'batch',
-    'proyectoFinal'
+    'proyectoFinal',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
