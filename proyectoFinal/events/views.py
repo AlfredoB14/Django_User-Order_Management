@@ -35,7 +35,7 @@ def home(request):
             elif order.status == 'Completed':
                 total_completed+=1
 
-        return render(request, 'events/adminHome.html', {'users':users, 'orders':orders, 'totals':totals, 'confirm':total_confirm, 'packaging':total_packaging, 'shipping':total_packaging, 'completed':total_completed})
+        return render(request, 'events/adminHome.html', {'users':users, 'orders':orders, 'totals':totals, 'confirm':total_confirm, 'packaging':total_packaging, 'shipping':total_shipping, 'completed':total_completed})
     
     else:
         return render(request, 'events/home.html', {})
